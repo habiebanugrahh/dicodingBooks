@@ -1,4 +1,5 @@
 function main() {
+  const baseUrl = 'https://books-api.dicoding.dev';
 
   const getBook = () => {
     // membuat instance dari XMLHttpRequest
@@ -20,7 +21,7 @@ function main() {
     };
 
     // Membuat GET request dan menetapkan target URL
-    xhr.open('GET', 'https://books-api.dicoding.dev/list');
+    xhr.open('GET', `${baseUrl}/list`);
 
     // Mengirimkan request
     xhr.send();
@@ -42,7 +43,7 @@ function main() {
     };
 
     // Membuat POST request dan menetapkan target URL
-    xhr.open('POST', 'https://books-api.dicoding.dev/add');
+    xhr.open('POST', `${baseUrl}/list`);
 
     // Menetapkan properti Content-Type dan X-Auth-Token pada Header request
     xhr.setRequestHeader('Content-Type', 'application/json');
