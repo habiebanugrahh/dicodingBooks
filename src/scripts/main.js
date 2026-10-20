@@ -1,7 +1,29 @@
 function main() {
 
   const getBook = () => {
-    // tuliskan kode di sini!
+    // membuat instance dari XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+
+    // menetapkan callback jika response sukses dan error
+    xhr.onload = function () {
+      const responseJson = JSON.parse(this.responseText);
+
+      if (responseJson.error) {
+        showResponseMessage(responseJson.message);
+      } else {
+        renderAllBooks(responseJson.books);
+      }
+    };
+
+    xhr.onerror = function () {
+      showResponseMessage();
+    };
+
+    // Membuat GET request dan menetapkan target URL
+    xhr.open('GET', 'https://books-api.dicoding.dev/list');
+
+    // Mengirimkan request
+    xhr.send();
   };
 
 
@@ -18,10 +40,10 @@ function main() {
   };
 
 
-  
-  
-  
-  
+
+
+
+
   /*
       jangan ubah kode di bawah ini ya!
   */
@@ -48,7 +70,7 @@ function main() {
     buttons.forEach(button => {
       button.addEventListener('click', event => {
         const bookId = event.target.id;
-        
+
         removeBook(bookId);
       });
     });
@@ -72,7 +94,7 @@ function main() {
         title: inputBookTitle.value,
         author: inputBookAuthor.value
       };
-      
+
       insertBook(book);
     });
 
