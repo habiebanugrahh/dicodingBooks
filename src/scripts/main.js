@@ -16,25 +16,24 @@ function main() {
     }
   };
 
-  const insertBook = (book) => {
-    fetch(`${baseUrl}/add`, {
+  const insertBook = async (book) => {
+    try {
+      const options = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-Auth-Token': '12345',
         },
         body: JSON.stringify(book),
-      })
-      .then((response) => {
-        return response.json();
-      })
-      .then((responseJson) => {
-        showResponseMessage(responseJson.message);
-        getBook();
-      })
-      .catch((error) => {
-        showResponseMessage(error);
-      });
+      };
+
+      const response = await fetch(`${baseUrl}/add`, options);
+      const responseJson = await response.json();
+      showResponseMessage(responseJson.message);
+      getBook();
+    } catch (error) {
+      showResponseMessage(error);
+    }
   };
 
   const updateBook = (book) => {
