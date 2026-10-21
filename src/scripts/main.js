@@ -1,22 +1,20 @@
 function main() {
   const baseUrl = 'https://books-api.dicoding.dev';
 
-  const getBook = () => {
-  fetch(`${baseUrl}/list`)
-    .then((response) => {
-      return response.json();
-    })
-    .then((responseJson) => {
+  const getBook = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/list`);
+      const responseJson = await response.json();
+
       if (responseJson.error) {
         showResponseMessage(responseJson.message);
       } else {
         renderAllBooks(responseJson.books);
       }
-    })
-    .catch((error) => {
+    } catch (error) {
       showResponseMessage(error);
-    });
-}; 
+    }
+  };
 
   const insertBook = (book) => {
     // Membuat instance dari XMLHttpRequest
